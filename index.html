@@ -12,51 +12,46 @@
     <main class="container">
       <header class="header">
         <h1>Instrumen Pemetaan Potensi Vokasional (RIASEC)</h1>
-        <p>Studi Penambangan Data Siswa Fase F — SMAN 6 Tangerang Selatan</p>
+        <p>
+          Studi Penambangan Data Siswa Kelas XII Eligible — SMAN 6 Tangerang
+          Selatan
+        </p>
       </header>
 
-      <section class="instructions">
+      <section id="instructionsSection" class="instructions">
         <strong>Petunjuk Pengisian:</strong>
         <p>
-          Berikan penilaian terhadap setiap aktivitas di bawah ini secara
-          objektif sesuai dengan minat diri Anda menggunakan skala
+          Berikan penilaian terhadap setiap aktivitas di bawah ini secara jujur
+          dan objektif sesuai dengan minat diri Anda menggunakan skala
           <strong>1 (Sangat Tidak Suka)</strong> hingga
-          <strong>5 (Sangat Suka)</strong>. Data Anda dijamin kerahasiaannya dan
-          hanya digunakan untuk keperluan pemetaan akademik.
+          <strong>5 (Sangat Suka)</strong>. Tidak ada jawaban benar atau salah.
+          Setelah mengirim respons, sistem akan menampilkan rincian skor dan
+          analisis kecocokan bidang studi Anda.
         </p>
       </section>
 
       <form id="riasecForm" novalidate>
-        <!-- Bagian 1: Identitas Anonim & Portofolio -->
+        <!-- Bagian 1: Identitas Kunci & Portofolio -->
         <fieldset class="card">
-          <legend>Bagian I: Identitas Kunci & Portofolio Prestasi</legend>
+          <legend>Bagian I: Verifikasi Populasi & Portofolio Prestasi</legend>
 
           <div class="form-group">
-            <label for="nisn"
-              >Nomor Induk Siswa Nasional (NISN) / ID Siswa *</label
-            >
+            <label for="nisn">Nomor Induk Siswa Nasional (NISN) *</label>
             <input
               type="text"
               id="nisn"
               name="nisn"
-              placeholder="Masukkan 10 digit NISN (Contoh: 0071234567)"
+              placeholder="Masukkan 10 digit NISN Anda (Contoh: 0071234567)"
               pattern="\d{8,12}"
               required
             />
             <small class="hint"
-              >Digunakan исключительно sebagai kunci pencocokan (Primary Key)
-              dengan nilai e-Rapor sebelum dianonimkan.</small
+              >Sistem akan memverifikasi NISN Anda terhadap daftar siswa Kelas
+              XII Eligible SMAN 6 Tangerang Selatan.</small
             >
           </div>
 
-          <div class="form-group">
-            <label for="kelas">Kelas (Fase F) *</label>
-            <select id="kelas" name="kelas" required>
-              <option value="">-- Pilih Kelas --</option>
-              <option value="XI">Kelas XI (Fase F)</option>
-              <option value="XII">Kelas XII (Fase F)</option>
-            </select>
-          </div>
+          <!-- === [PERUBAHAN 1: Dropdown 'Kelas' dihapus karena diambil otomatis dari Whitelist Server] === -->
 
           <div class="form-group">
             <label for="portofolio"
@@ -88,14 +83,64 @@
           </div>
         </fieldset>
 
-        <!-- Bagian 2: Container Dinamis 30 Butir RIASEC -->
+        <!-- Bagian 2: Container Dinamis 30 Butir RIASEC Teracak Tanpa Label Dimensi -->
         <div id="questionsContainer"></div>
 
         <div class="submit-area">
-          <button type="submit" id="submitBtn">Kirim Respons Asesmen</button>
+          <button type="submit" id="submitBtn">
+            Kirim & Lihat Hasil Analisis Minat
+          </button>
           <p id="statusMessage" class="status-msg" aria-live="polite"></p>
         </div>
       </form>
+
+      <!-- === [PERUBAHAN 2: Penambahan Kontainer SPA untuk Menampilkan Insight & Skor Pasca-Tes] === -->
+      <section id="resultView" class="card hidden" aria-live="polite">
+        <div class="result-header">
+          <span class="badge-success">Data Berhasil Direkam</span>
+          <h2>Laporan Profil Minat Vokasional (Holland Triad)</h2>
+          <p id="studentIdentityText" class="muted-text"></p>
+        </div>
+
+        <div class="triad-summary">
+          <p class="triad-label">Kombinasi 3 Tipe Kepribadian Dominan Anda:</p>
+          <div id="triadCodeDisplay" class="triad-code-box"></div>
+          <p id="triadNamesDisplay" class="triad-names"></p>
+        </div>
+
+        <div class="result-section">
+          <h3>Distribusi Skor Dimensi RIASEC</h3>
+          <p class="section-desc">
+            Grafik berikut merepresentasikan intensitas minat Anda pada keenam
+            dimensi vokasional (skor maksimum 25 poin atau 100% per dimensi):
+          </p>
+          <div id="scoreBarsContainer" class="score-bars"></div>
+        </div>
+
+        <div class="result-section">
+          <h3>Analisis Mendalam & Rekomendasi Rumpun Studi</h3>
+          <p class="section-desc">
+            Berdasarkan urutan tiga skor tertinggi Anda, berikut adalah
+            karakteristik potensi dan bidang keilmuan perguruan tinggi yang
+            relevan:
+          </p>
+          <div id="insightsContainer" class="insights-list"></div>
+        </div>
+
+        <div class="disclaimer-box">
+          <strong>Catatan Akademis (Disclaimer):</strong>
+          <p>
+            Hasil pemetaan ini merupakan kalkulasi algoritmik awal berbasis
+            instrumen <em>Self-Assessment Holland Codes (RIASEC)</em> untuk
+            keperluan penelitian penambangan data (<em
+              >Educational Data Mining</em
+            >) dan <strong>bukan</strong> merupakan diagnosis klinis psikologi
+            resmi. Gunakan wawasan ini sebagai bahan diskusi bersama Guru
+            Bimbingan Konseling (BK) dan orang tua dalam merencanakan studi
+            lanjut.
+          </p>
+        </div>
+      </section>
     </main>
 
     <script src="app.js"></script>
