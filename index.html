@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Instrumen Pemetaan Minat Bakat RIASEC - SMAN 6 Tangerang Selatan
+    </title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <h1>Instrumen Pemetaan Potensi Vokasional (RIASEC)</h1>
+        <p>Studi Penambangan Data Siswa Fase F — SMAN 6 Tangerang Selatan</p>
+      </header>
+
+      <section class="instructions">
+        <strong>Petunjuk Pengisian:</strong>
+        <p>
+          Berikan penilaian terhadap setiap aktivitas di bawah ini secara
+          objektif sesuai dengan minat diri Anda menggunakan skala
+          <strong>1 (Sangat Tidak Suka)</strong> hingga
+          <strong>5 (Sangat Suka)</strong>. Data Anda dijamin kerahasiaannya dan
+          hanya digunakan untuk keperluan pemetaan akademik.
+        </p>
+      </section>
+
+      <form id="riasecForm" novalidate>
+        <!-- Bagian 1: Identitas Anonim & Portofolio -->
+        <fieldset class="card">
+          <legend>Bagian I: Identitas Kunci & Portofolio Prestasi</legend>
+
+          <div class="form-group">
+            <label for="nisn"
+              >Nomor Induk Siswa Nasional (NISN) / ID Siswa *</label
+            >
+            <input
+              type="text"
+              id="nisn"
+              name="nisn"
+              placeholder="Masukkan 10 digit NISN (Contoh: 0071234567)"
+              pattern="\d{8,12}"
+              required
+            />
+            <small class="hint"
+              >Digunakan исключительно sebagai kunci pencocokan (Primary Key)
+              dengan nilai e-Rapor sebelum dianonimkan.</small
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="kelas">Kelas (Fase F) *</label>
+            <select id="kelas" name="kelas" required>
+              <option value="">-- Pilih Kelas --</option>
+              <option value="XI">Kelas XI (Fase F)</option>
+              <option value="XII">Kelas XII (Fase F)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="portofolio"
+              >Kategori Portofolio Prestasi Non-Akademik Dominan *</label
+            >
+            <select id="portofolio" name="portofolio" required>
+              <option value="Tidak Ada">
+                Tidak Ada / Belum Memiliki Sertifikat Kejuaraan
+              </option>
+              <option value="Olimpiade Sains">
+                Olimpiade Sains / Karya Ilmiah / Riset
+              </option>
+              <option value="Teknologi dan Komputer">
+                Kompetisi Teknologi / Pemrograman / Robotik
+              </option>
+              <option value="Juara Seni dan Bahasa">
+                Festival Seni / Desain / Musik / Sastra & Bahasa
+              </option>
+              <option value="Kejuaraan Olahraga">
+                Kejuaraan Olahraga / Atletik / Bela Diri
+              </option>
+              <option value="Kepemimpinan dan Bisnis">
+                Kewirausahaan / Debat / Kepemimpinan Organisasi
+              </option>
+              <option value="Sosial dan Keagamaan">
+                Kegiatan Sosial / Palang Merah / Keagamaan
+              </option>
+            </select>
+          </div>
+        </fieldset>
+
+        <!-- Bagian 2: Container Dinamis 30 Butir RIASEC -->
+        <div id="questionsContainer"></div>
+
+        <div class="submit-area">
+          <button type="submit" id="submitBtn">Kirim Respons Asesmen</button>
+          <p id="statusMessage" class="status-msg" aria-live="polite"></p>
+        </div>
+      </form>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
