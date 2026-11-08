@@ -3,48 +3,126 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1e3a8a" />
     <title>
       Instrumen Pemetaan Minat Bakat RIASEC - SMAN 6 Tangerang Selatan
     </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <main class="container">
-      <header class="header">
+    <!-- Hero / Header -->
+    <header class="hero">
+      <div class="hero-inner">
+        <span class="hero-badge">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3zm-6.82 9.5L12 16.27l6.82-3.77V16L12 20l-6.82-4v-3.5z" />
+          </svg>
+          SMAN 6 Tangerang Selatan
+        </span>
         <h1>Instrumen Pemetaan Potensi Vokasional (RIASEC)</h1>
-        <p>
-          Studi Penambangan Data Siswa Kelas XII Eligible — SMAN 6 Tangerang
-          Selatan
+        <p class="hero-subtitle">
+          Kenali tipe minat kariermu dan temukan rumpun program studi yang
+          paling sesuai. Studi Penambangan Data Siswa Kelas XII Eligible.
         </p>
-      </header>
+        <ul class="hero-meta">
+          <li><span class="meta-icon">📝</span> 30 Pernyataan</li>
+          <li><span class="meta-icon">⏱️</span> ± 5–7 Menit</li>
+          <li><span class="meta-icon">📊</span> Hasil Langsung Tampil</li>
+        </ul>
+      </div>
+    </header>
 
-      <section id="instructionsSection" class="instructions">
-        <strong>Petunjuk Pengisian:</strong>
-        <p>
-          Berikan penilaian terhadap setiap aktivitas di bawah ini secara jujur
-          dan objektif sesuai dengan minat diri Anda menggunakan skala
-          <strong>1 (Sangat Tidak Suka)</strong> hingga
-          <strong>5 (Sangat Suka)</strong>. Tidak ada jawaban benar atau salah.
-          Setelah mengirim respons, sistem akan menampilkan rincian skor dan
-          analisis kecocokan bidang studi Anda.
-        </p>
+    <!-- Progress Bar Sticky -->
+    <div id="progressWrapper" class="progress-wrapper" aria-hidden="false">
+      <div class="progress-inner">
+        <div class="progress-info">
+          <span class="progress-title">Progres Pengisian</span>
+          <span class="progress-count">
+            <strong id="progressCount">0</strong> / <span id="progressTotal">30</span>
+            terjawab · <span id="progressPercent">0%</span>
+          </span>
+        </div>
+        <div
+          class="progress-track"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          id="progressTrack"
+        >
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <main class="container">
+      <section id="instructionsSection" class="instructions card">
+        <h2 class="instructions-title">Petunjuk Pengisian</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-num">1</span>
+            <div>
+              <strong>Isi identitas</strong>
+              <p>Masukkan NISN dan pilih kategori prestasi non-akademik yang paling dominan.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            <div>
+              <strong>Baca setiap pernyataan</strong>
+              <p>Pilih jawaban yang paling menggambarkan dirimu. Tidak ada jawaban benar atau salah.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            <div>
+              <strong>Lihat hasilnya</strong>
+              <p>Setelah dikirim, sistem langsung menampilkan skor dan rekomendasi bidang studi.</p>
+            </div>
+          </li>
+        </ol>
+        <div class="scale-legend" aria-label="Keterangan skala jawaban">
+          <span class="scale-chip s1"><b>1</b> Sangat Tidak Sesuai</span>
+          <span class="scale-chip s2"><b>2</b> Tidak Sesuai</span>
+          <span class="scale-chip s3"><b>3</b> Netral</span>
+          <span class="scale-chip s4"><b>4</b> Sesuai</span>
+          <span class="scale-chip s5"><b>5</b> Sangat Sesuai</span>
+        </div>
       </section>
 
       <form id="riasecForm" novalidate>
         <!-- Bagian 1: Identitas Kunci & Portofolio -->
         <fieldset class="card">
-          <legend>Bagian I: Verifikasi Populasi & Portofolio Prestasi</legend>
+          <legend class="section-legend">
+            <span class="section-step">Bagian I</span>
+            <span class="section-name">Verifikasi Identitas &amp; Portofolio Prestasi</span>
+          </legend>
 
           <div class="form-group">
-            <label for="nisn">Nomor Induk Siswa Nasional (NISN) *</label>
-            <input
-              type="text"
-              id="nisn"
-              name="nisn"
-              placeholder="Masukkan 10 digit NISN Anda (Contoh: 0071234567)"
-              pattern="\d{8,12}"
-              required
-            />
+            <label for="nisn">Nomor Induk Siswa Nasional (NISN) <span class="req">*</span></label>
+            <div class="input-wrap">
+              <span class="input-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z" /></svg>
+              </span>
+              <input
+                type="text"
+                id="nisn"
+                name="nisn"
+                inputmode="numeric"
+                autocomplete="off"
+                maxlength="12"
+                placeholder="Contoh: 0071234567"
+                pattern="\d{8,12}"
+                required
+              />
+              <span class="input-status" aria-hidden="true"></span>
+            </div>
             <small class="hint"
               >Sistem akan memverifikasi NISN Anda terhadap daftar siswa Kelas
               XII Eligible SMAN 6 Tangerang Selatan.</small
@@ -55,55 +133,68 @@
 
           <div class="form-group">
             <label for="portofolio"
-              >Kategori Portofolio Prestasi Non-Akademik Dominan *</label
+              >Kategori Portofolio Prestasi Non-Akademik Dominan <span class="req">*</span></label
             >
-            <select id="portofolio" name="portofolio" required>
-              <option value="Tidak Ada">
-                Tidak Ada / Belum Memiliki Sertifikat Kejuaraan
-              </option>
-              <option value="Olimpiade Sains">
-                Olimpiade Sains / Karya Ilmiah / Riset
-              </option>
-              <option value="Teknologi dan Komputer">
-                Kompetisi Teknologi / Pemrograman / Robotik
-              </option>
-              <option value="Juara Seni dan Bahasa">
-                Festival Seni / Desain / Musik / Sastra & Bahasa
-              </option>
-              <option value="Kejuaraan Olahraga">
-                Kejuaraan Olahraga / Atletik / Bela Diri
-              </option>
-              <option value="Kepemimpinan dan Bisnis">
-                Kewirausahaan / Debat / Kepemimpinan Organisasi
-              </option>
-              <option value="Sosial dan Keagamaan">
-                Kegiatan Sosial / Palang Merah / Keagamaan
-              </option>
-            </select>
+            <div class="input-wrap select-wrap">
+              <span class="input-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0 0 11 15.9V19H7v2h10v-2h-4v-3.1a5.01 5.01 0 0 0 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z" /></svg>
+              </span>
+              <select id="portofolio" name="portofolio" required>
+                <option value="Tidak Ada">
+                  Tidak Ada / Belum Memiliki Sertifikat Kejuaraan
+                </option>
+                <option value="Olimpiade Sains">
+                  Olimpiade Sains / Karya Ilmiah / Riset
+                </option>
+                <option value="Teknologi dan Komputer">
+                  Kompetisi Teknologi / Pemrograman / Robotik
+                </option>
+                <option value="Juara Seni dan Bahasa">
+                  Festival Seni / Desain / Musik / Sastra &amp; Bahasa
+                </option>
+                <option value="Kejuaraan Olahraga">
+                  Kejuaraan Olahraga / Atletik / Bela Diri
+                </option>
+                <option value="Kepemimpinan dan Bisnis">
+                  Kewirausahaan / Debat / Kepemimpinan Organisasi
+                </option>
+                <option value="Sosial dan Keagamaan">
+                  Kegiatan Sosial / Palang Merah / Keagamaan
+                </option>
+              </select>
+            </div>
           </div>
         </fieldset>
 
         <!-- Bagian 2: Container Dinamis 30 Butir RIASEC Teracak Tanpa Label Dimensi -->
         <div id="questionsContainer"></div>
 
-        <div class="submit-area">
+        <div class="submit-area card">
+          <p class="submit-note">
+            Pastikan semua pernyataan sudah terjawab. Kamu masih bisa mengubah
+            jawaban sebelum menekan tombol kirim.
+          </p>
           <button type="submit" id="submitBtn">
-            Kirim & Lihat Hasil Analisis Minat
+            <span class="btn-spinner" aria-hidden="true"></span>
+            <span class="btn-label">Kirim &amp; Lihat Hasil Analisis Minat</span>
           </button>
           <p id="statusMessage" class="status-msg" aria-live="polite"></p>
         </div>
       </form>
 
       <!-- === [PERUBAHAN 2: Penambahan Kontainer SPA untuk Menampilkan Insight & Skor Pasca-Tes] === -->
-      <section id="resultView" class="card hidden" aria-live="polite">
+      <section id="resultView" class="card result-card hidden" aria-live="polite">
         <div class="result-header">
-          <span class="badge-success">Data Berhasil Direkam</span>
+          <span class="badge-success">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" /></svg>
+            Data Berhasil Direkam
+          </span>
           <h2>Laporan Profil Minat Vokasional (Holland Triad)</h2>
           <p id="studentIdentityText" class="muted-text"></p>
         </div>
 
         <div class="triad-summary">
-          <p class="triad-label">Kombinasi 3 Tipe Kepribadian Dominan Anda:</p>
+          <p class="triad-label">Kombinasi 3 Tipe Kepribadian Dominan Anda</p>
           <div id="triadCodeDisplay" class="triad-code-box"></div>
           <p id="triadNamesDisplay" class="triad-names"></p>
         </div>
@@ -118,7 +209,7 @@
         </div>
 
         <div class="result-section">
-          <h3>Analisis Mendalam & Rekomendasi Rumpun Studi</h3>
+          <h3>Analisis Mendalam &amp; Rekomendasi Rumpun Studi</h3>
           <p class="section-desc">
             Berdasarkan urutan tiga skor tertinggi Anda, berikut adalah
             karakteristik potensi dan bidang keilmuan perguruan tinggi yang
@@ -140,7 +231,18 @@
             lanjut.
           </p>
         </div>
+
+        <div class="result-actions">
+          <button type="button" id="printBtn" class="btn-secondary">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z" /></svg>
+            Cetak / Simpan sebagai PDF
+          </button>
+        </div>
       </section>
+
+      <footer class="site-footer">
+        © SMAN 6 Tangerang Selatan · Instrumen Penelitian RIASEC
+      </footer>
     </main>
 
     <script src="app.js"></script>
